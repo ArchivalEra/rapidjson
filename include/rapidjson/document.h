@@ -316,7 +316,7 @@ struct GenericStringRef {
 
     GenericStringRef(const GenericStringRef& rhs) : s(rhs.s), length(rhs.length) {}
 
-    GenericStringRef& operator=(const GenericStringRef& rhs) { s = rhs.s; length = rhs.length; }
+    GenericStringRef& operator=(const GenericStringRef& rhs) { (void) rhs; return *this; }  /* [Octave-Full-Wasm 补丁] 成员皆 const，原实现写 const 成员，新 clang 报错 */
 
     //! implicit conversion to plain CharType pointer
     operator const Ch *() const { return s; }
